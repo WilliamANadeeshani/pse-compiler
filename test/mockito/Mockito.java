@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import static org.easymock.EasyMock.mock;
 import static org.mockito.Mockito.*;
 
 

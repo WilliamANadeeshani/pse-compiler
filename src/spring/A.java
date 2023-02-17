@@ -1,4 +1,4 @@
-package Spring;
+package spring;
 
 public class A implements InterfaceA {
 

@@ -1,8 +1,8 @@
-package Spring;
+package spring;
 
-//import mockito.Mockito;
-//import org.springframework.context.annotation.Bean;
-//
+import mockito.Mockito;
+import org.springframework.context.annotation.Bean;
+
 //
 //import static org.mockito.Mockito.mock;
 //

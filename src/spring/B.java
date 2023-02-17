@@ -1,4 +1,4 @@
-package Spring;
+package spring;
 
 public class B {
     public void print(){
