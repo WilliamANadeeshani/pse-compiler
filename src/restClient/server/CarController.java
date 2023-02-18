@@ -1,10 +1,16 @@
 package restClient.server;
 
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import restClient.model.Car;
 
+import org.springframework.hateoas.EntityModel;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 /**
  * this class provides dummy values for local testing
@@ -20,8 +26,16 @@ public class CarController {
     private static final List<Car> CARS = List.of(BMW, MERCEDES, AUDI, TOYOTA);
 
     @GetMapping("/cars")
-    public List<Car> getAllCars() {
-        return CARS;
+    public CollectionModel<EntityModel<Car>> getAllCars() {
+        List<Car> cars = CARS;
+
+        List<EntityModel<Car>> resultWithLinks = cars.stream().map(car -> {
+            EntityModel<Car> carEntityModel = EntityModel.of(car);
+            carEntityModel.add(linkTo(methodOn(CarController.class).getCarById(car.getId())).withSelfRel());
+            return carEntityModel;
+        }).toList();
+
+        return CollectionModel.of(resultWithLinks, linkTo(methodOn(CarController.class).getAllCars()).withSelfRel());
     }
 
     @GetMapping("/cars/{id}")
